@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block extra_css %}
+<style>
+    @media (min-width: 576px) {
+        .col-sm-9 {
+            flex: 0 0 75%;
+            max-width: 75%;
+
+        }
+
+        .h1 {
+            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
+        }
+    }
+</style>
+{% endblock extra_css %}
+{% block content %}
+<div class="container m-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-8 mb-3">
+            <h1 class="d-flex justify-content-center align-items-center">
+                <input type="hidden" id="upload_url" value="{% url 'RemoveBG' %}">
+                <span class="d-block col-sm-4 ps-2 pe-2 fs-1 fw-bolder text-center" style="font-family: 'Poppins', sans-serif;
+                font-family: 'Roboto', sans-serif; min-width:550px">Upload an image to remove the background</span>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-4">
+            <div class="card shadow-lg rounded-3 border-0">
+                <div class="card-body">
+                    <form action="" method="POST" enctype="multipart/form-data" id="onClickHandler()" class="row">
+                        {% csrf_token %}
+                        <div class="col-md-12 mb-3">
+                            <input type="file" name="img" id="upload_img" hidden>
+                            <div class="border rounded-3 text-center p-3"
+                                style="border-style: dashed !important; border-color: grey;border-width: 2px !important;">
+                                <img src="{{rmbg_img}}" id="out" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center mb-3">
+                            <button type="button" class="btn btn-primary rounded-pill d-inline-block"
+                                style="width:200px;max-width: 200px;" onclick="onClickHandler(event);">
+                                Upload
+                            </button>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-success d-none rounded-pill"
+                                style="width:200px;max-width: 200px;" id="submit_btn">
+                                Submit
+                            </button>
+                        </div>
+                        <!-- <input type="file" name="img" hidden> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {{remove_bg}}
+        </div>
+    </div>
+</div>
+{% endblock content %}
