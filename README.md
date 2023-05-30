@@ -1,4 +1,3 @@
-# Background-remover
 # Django Background Remover
 
 This Django project allows you to remove the background from images using the `rembg` library and PIL (Python Imaging Library).
